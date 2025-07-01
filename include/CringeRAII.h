@@ -20,14 +20,11 @@ public:
     // Метод writeLine - будет использоваться для записи информации в файл
     void writeLine(const std::string& line);
 
-    //Запрещаем копирование и присваивание объекта, чтобы избежать ненужных ошибок, по типу владения одним и тем же ресурсом у двух объектов,
-    //где закроется корректно один объект (файл), а второй - нет, будет неопределенное поведение
+
     CringeRAII(const CringeRAII&) = delete;
-    CringeRAII& operator= (const CringeRAII&) = delete;
-
     CringeRAII (CringeRAII&& other) = delete;
-
-    CringeRAII& operator= (CringeRAII&& other);
+    CringeRAII& operator= (CringeRAII&& other) = delete;
+    CringeRAII& operator= (const CringeRAII&);
 
 private:
     // file - поток для работы с файлом
