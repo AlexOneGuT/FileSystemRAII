@@ -22,9 +22,10 @@ public:
 
 
     CringeRAII(const CringeRAII&) = delete;
-    CringeRAII (CringeRAII&& other) = delete;
-    CringeRAII& operator= (CringeRAII&& other) = delete;
-    CringeRAII& operator= (const CringeRAII&);
+    CringeRAII (const CringeRAII&& other) = delete;
+    CringeRAII& operator= (CringeRAII& other) = delete;
+    CringeRAII& operator= (CringeRAII&& other);
+
 
 private:
     // file - поток для работы с файлом
