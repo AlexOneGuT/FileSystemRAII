@@ -1,7 +1,7 @@
 #include "CringeRAII.h"
 #include <stdexcept>
 
-// Конструктор - открываем файл
+// ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г° - Г®ГІГЄГ°Г»ГўГ ГҐГ¬ ГґГ Г©Г«
 CringeRAII::CringeRAII(const std::string& filePath, std::ios_base::openmode mode) : path(filePath) {
     file.open(filePath, mode);
     if (!file.is_open()) {
@@ -9,14 +9,26 @@ CringeRAII::CringeRAII(const std::string& filePath, std::ios_base::openmode mode
     }
 }
 
-// Деструктор - закрываем файл
+// Г„ГҐГ±ГІГ°ГіГЄГІГ®Г° - Г§Г ГЄГ°Г»ГўГ ГҐГ¬ ГґГ Г©Г«
 CringeRAII::~CringeRAII() {
     if (file.is_open()) {
         file.close();
     }
 }
 
-// Чтение строки из файла
+CringeRAII::CringeRAII& operator= (FileRAII&& other) noexcept {
+    if (this != &other) {
+        if (file.is_open()) {
+            file.close();
+        }
+        file = std::move(other.file);
+        path = std::move(other.path);
+        other.file.close();
+    }
+    return *this;
+}
+
+// Г—ГІГҐГ­ГЁГҐ Г±ГІГ°Г®ГЄГЁ ГЁГ§ ГґГ Г©Г«Г 
 std::string CringeRAII::readLine() {
     std::string line;
     if (!std::getline(file, line)) {
@@ -30,7 +42,7 @@ std::string CringeRAII::readLine() {
     return line;
 }
 
-// Запись строки в файл
+// Г‡Г ГЇГЁГ±Гј Г±ГІГ°Г®ГЄГЁ Гў ГґГ Г©Г«
 void CringeRAII::writeLine(const std::string& line) {
     if (!(file << line << '\n')) {
         throw std::runtime_error("Error writing to file: " + path);
