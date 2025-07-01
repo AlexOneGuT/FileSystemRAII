@@ -25,7 +25,7 @@ public:
     CringeRAII(const CringeRAII&) = delete;
     CringeRAII& operator= (const CringeRAII&) = delete;
 
-    CringeRAII (FileRAII&& other) = delete;
+    CringeRAII (CringeRAII&& other) = delete;
 
     CringeRAII& operator= (CringeRAII&& other);
 
