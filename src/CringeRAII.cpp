@@ -16,7 +16,7 @@ CringeRAII::~CringeRAII() {
     }
 }
 
-CringeRAII::CringeRAII& operator= (FileRAII&& other) noexcept {
+CringeRAII::CringeRAII& operator= (CringeRAII&& other) noexcept {
     if (this != &other) {
         if (file.is_open()) {
             file.close();
